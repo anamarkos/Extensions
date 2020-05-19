@@ -11,6 +11,23 @@ namespace Extensions
     public static class IQueryableExtensions
     {
         /// <summary>
+        /// Needs testing
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="condition"></param>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public static IQueryable<TSource> WhereIf<TSource>(this IQueryable<TSource> source, bool condition, Expression<Func<TSource, bool>> predicate)
+        {
+            if (condition)
+                return Queryable.Where(source, predicate);
+            else
+                return source;
+        }
+
+
+        /// <summary>
         /// Usage: IQueryable<T> query = IQueryableExtensions.WhereConditional(query, active, x => x.Active == active.Value);
         /// </summary>
         /// <typeparam name="TSource">The type of the source.</typeparam>
